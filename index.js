@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 4000;
 const Sequelize = require("sequelize");
 const connectionString =
   process.env.DATABASE_URL ||
@@ -8,8 +7,11 @@ const connectionString =
 const sequelize = new Sequelize(connectionString, {
   define: { timestamps: false }
 });
-
-app.listen(port, () => `Listening on port ${port}`);
+const port = process.env.PORT || 80;
+// console.log("lalala", port);
+app.listen(port, function() {
+  console.log(`Listening on port ${port}`);
+});
 
 const House = sequelize.define(
   "house",
