@@ -7,8 +7,8 @@ const connectionString =
 const sequelize = new Sequelize(connectionString, {
   define: { timestamps: false }
 });
-const port = process.env.PORT || 80;
-// console.log("lalala", port);
+const port = process.env.PORT || 4000;
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
@@ -60,6 +60,7 @@ app.post("/houses", function(req, res) {
   House.create(req.body)
     .then(house => res.status(201).json(house))
     .catch(err => {
+      console.error(err);
       res.status(500).json({
         message: "Database offline",
         error: err
@@ -72,7 +73,7 @@ app.put("/houses/:id", function(req, res) {
   House.findByPk(id).then(house => {
     house
       .update({
-        title: "Super Duper Million Dollar Mainson"
+        title: "Super Duper Million Dollar Manson"
       })
       .then(house => res.status(201))
       .then(res.send(house))
